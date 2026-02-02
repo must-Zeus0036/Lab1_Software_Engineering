@@ -5,7 +5,7 @@ from dotenv import load_dotenv
 # Load .env from root
 load_dotenv()
 SERVER_IP = os.getenv("SERVER_IP", "127.0.0.1")
-SERVER_PORT = int(os.getenv("SERVER_PORT", "6002"))
+SERVER_PORT = int(os.getenv("TASK3_PORT", "6005"))
 
 
 class HouseClient:
