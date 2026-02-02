@@ -11,7 +11,7 @@ SERVER_PORT = int(os.getenv("SERVER_PORT", "7000"))
 
 
 class HouseStorage:
-    """Requirement 2b, 2c, 2e: read/write House.json safely."""
+    #read/write House.json safely
     def __init__(self, filename="House.json"):
         self.filename = filename
         self.lock = threading.Lock()
@@ -34,10 +34,7 @@ class HouseStorage:
                 json.dump(state, f, indent=2)
 
     def update_from_message(self, message):
-        """
-        message example: "light:off,door:closed,window:closed"
-        Updates JSON file (Requirement 2e).
-        """
+        #message example: "light:off,door:closed,window:closed" Updates JSON file
         state = self.read()
 
         parts = message.split(",")
@@ -53,7 +50,7 @@ class HouseStorage:
 
 
 class ClientHandler(threading.Thread):
-    """Requirement 2: handle each client in a separate thread."""
+    # handle each client in a separate thread 
     def __init__(self, conn, addr, client_id, storage):
         super().__init__(daemon=True)
         self.conn = conn
@@ -88,7 +85,7 @@ class ClientHandler(threading.Thread):
 
 
 class Server:
-    """Main multi-client TCP server."""
+    #Main multi-client TCP server
     def __init__(self, ip=SERVER_IP, port=SERVER_PORT):
         self.ip = ip
         self.port = port
@@ -109,5 +106,5 @@ class Server:
             ClientHandler(conn, addr, self.client_counter, self.storage).start()
 
 
-if __name__ == "__main__":
+if __name__ == "__main__": # Run the server
     Server().start()
